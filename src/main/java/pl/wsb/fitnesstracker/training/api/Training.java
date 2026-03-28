@@ -28,7 +28,7 @@ public class Training {
     @Column(name = "end_time", nullable = false)
     private Date endTime;
 
-    @Enumerated(EnumType.STRING) // Dobra praktyka dla Enumów
+    @Enumerated(EnumType.STRING)
     @Column(name = "activity_type", nullable = false)
     private ActivityType activityType;
 
