@@ -6,7 +6,6 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import pl.wsb.fitnesstracker.statistics.api.Statistics;
 
 import java.time.LocalDate;
 
@@ -33,10 +32,6 @@ public class User {
 
     @Column(nullable = false, unique = true)
     private String email;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "statistics", referencedColumnName = "id")
-    private Statistics statistics;
 
     public User(
             final String firstName,
