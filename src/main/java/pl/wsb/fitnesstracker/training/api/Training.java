@@ -1,26 +1,21 @@
 package pl.wsb.fitnesstracker.training.api;
 
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 import pl.wsb.fitnesstracker.training.internal.ActivityType;
 import pl.wsb.fitnesstracker.user.api.User;
-
 import java.util.Date;
 
 @Entity
 @Table(name = "trainings")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@ToString
 public class Training {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Nullable
     private Long id;
 
     @ManyToOne
@@ -37,10 +32,10 @@ public class Training {
     @Column(name = "activity_type", nullable = false)
     private ActivityType activityType;
 
-    @Column(nullable = false)
+    @Column(name = "distance")
     private double distance;
 
-    @Column(name = "average_speed", nullable = false)
+    @Column(name = "average_speed")
     private double averageSpeed;
 
     public Training(
