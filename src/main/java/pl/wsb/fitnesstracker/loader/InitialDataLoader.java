@@ -9,12 +9,15 @@ import org.springframework.context.event.EventListener;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import pl.wsb.fitnesstracker.event.Event;
+import pl.wsb.fitnesstracker.event.EventRepository;
 import pl.wsb.fitnesstracker.training.api.Training;
 import pl.wsb.fitnesstracker.training.internal.ActivityType;
 import pl.wsb.fitnesstracker.user.api.User;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +39,8 @@ class InitialDataLoader {
 
     private final JpaRepository<Training, Long> trainingRepository;
 
+    private final EventRepository eventRepository;
+
     @EventListener
     @Transactional
     @SuppressWarnings({"squid:S1854", "squid:S1481", "squid:S1192", "unused"})
@@ -47,6 +52,15 @@ class InitialDataLoader {
         List<User> sampleUserList = generateSampleUsers();
         List<Training> sampleTrainingList = generateTrainingData(sampleUserList);
 
+        eventRepository.save(new Event("Maraton Warszawski", LocalDate.now().plusMonths(2), "Warszawa"));
+        eventRepository.save(new Event("Bieg Uliczny", LocalDate.now().plusWeeks(3), "Kraków"));
+        eventRepository.save(new Event("Stary Event", LocalDate.now().minusDays(10), "Gdańsk"));
+
+        List<Event> upcoming = eventRepository.findUpcoming(LocalDate.now());
+        log.info("Nadchodzące eventy: {}", upcoming.size());
+
+        List<Object[]> eventStats = eventRepository.findEventNamesWithParticipantCount();
+        eventStats.forEach(row -> log.info("Event: {}, uczestnicy: {}", row[0], row[1]));
 
         log.info("Finished loading initial data");
     }
