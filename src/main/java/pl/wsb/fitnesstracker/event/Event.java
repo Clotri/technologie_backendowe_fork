@@ -1,14 +1,34 @@
 package pl.wsb.fitnesstracker.event;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-// TODO: Define the Event entity with appropriate fields and annotations
+import java.time.LocalDate;
+
 @Entity
-@Table
+@Table(name = "event")
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Event {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false)
+    private String name;
+
+    @Column(name = "start_date", nullable = false)
+    private LocalDate startDate;
+
+    @Column
+    private String location;
+
+    public Event(String name, LocalDate startDate, String location) {
+        this.name = name;
+        this.startDate = startDate;
+        this.location = location;
+    }
 }
