@@ -26,6 +26,7 @@ class UserController {
     private final UserProvider userProvider;
     private final UserMapper userMapper;
 
+
     /**
      * Returns all users with full details.
      *
