@@ -42,13 +42,6 @@ zdobyć wiele osiągnięć; jedno osiągnięcie należy do jednego użytkownika)
 > zera: `@Entity`, `@Id` typu `Long` + `@GeneratedValue`, pola `name` (String),
 > `earnedAt` (`LocalDateTime`) oraz relacja `@ManyToOne` do `User`.
 
-Wymagania techniczne — żeby test STAGE Achievement był zielony, w bazie musi
-powstać tabela `achievement` z kolumnami:
-
-- `id` — klucz główny,
-- `user_id` — klucz obcy do `users` (z `@JoinColumn(name = "user_id")`),
-- pozostałe pola encji.
-
 Szkielet (do uzupełnienia samodzielnie):
 
 ```java
@@ -88,12 +81,7 @@ public class Achievement {
 }
 ```
 
-> Powyższy szkielet to **przykład, nie gotowiec**. Możecie użyć Lomboka
-> (`@Getter`, `@NoArgsConstructor(access = AccessLevel.PROTECTED)`,
-> `@ToString`) — tak jak w pozostałych encjach z LAB03 — albo napisać
-> gettery ręcznie. Liczy się to, że tabela `achievement` istnieje i ma
-> kolumny `id` oraz `user_id`.
-
+> Powyższy szkielet to **przykład, nie gotowiec**. 
 ---
 
 ## 2. Testy — dopisz dwa @Test do `Lab03EntitiesTest`
